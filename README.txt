@@ -1,0 +1,1 @@
+[bone.png](https://github.com/ShawnTeoh/gaozai/blob/master/res/bone.png) & [favi.png](https://github.com/ShawnTeoh/gaozai/blob/master/res/favi.png) made by Freepik from [www.flaticon.com](https://www.flaticon.com/)
