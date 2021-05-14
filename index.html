@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="96x96" href="res/favi.png">
+    <title>Gao Zai!</title>
+    <meta property="og:title" content="Hi it me Gao Zai! Gib pets please?">
+    <meta property="og:image" content="res/gaozai-static.jpg">
+    <meta property="og:url" content="https://shawnteoh.github.io/gaozai">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Hi it me Gao Zai! Gimme pets please?">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="res/demstyles.css">
+</head>
+<body class="bg-image">
+    <div class="container">
+    <div class="row p-2">
+        <div class="bg-dark text-white text-center rounded-3">
+            <h1>Hi everybadai, it me Gao Zai!<br/>Welcome to Internetz!</h1>
+            <span class="fs-3">Gib 1 Million pets pls?</span>
+        </div>
+    </div>
+    <div class="row p-2 justify-content-center">
+        <div class="gz-container border border-5">
+            <div class="patCount gz-color text-center fs-4">
+                <span>...</span> pats given!
+            </div>
+            <img src="res/gaozai.jpg">
+        </div>
+        <div class="stats">
+            <div class="pos"></div>
+            <div class="xpos"></div>
+        </div>
+    </div>
+    <div class="row p-2">
+        <div class="col text-center">
+            <a class="btn gz-color" target="_blank" href="https://www.instagram.com/julio_the_gaozai/">Instagram</a>
+            <a class="btn gz-color" target="_blank" href="https://kabosutoken.io/">Support my friends!</a>
+        </div>
+    </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://api.backendless.com/sdk/js/latest/backendless.min.js"></script>
+<script>
+function digits(countFormat){ 
+    var parts = countFormat.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+
+const appId = 'F02175AF-4FE0-4A47-AFEB-77297BFF37FA';
+const apiKey = 'B3640179-FB49-4989-ADF2-58856454A80F';
+Backendless.initApp(appId, apiKey);
+
+var patCount = Backendless.APIServices.invoke('Gaozai', 'patcount', null);
+patCount.then(function(result) {
+    patCount = result;
+    $('.patCount span').html(digits(patCount));
+});
+
+var patStart = true;
+$(".gz-container").on("mousemove touchmove", function(event) {
+    var mobile = window.matchMedia("(min-width: 320px)") && window.matchMedia("(max-width: 480px)").matches;
+    var offset = $(this).offset();
+    var x = event.pageX || event.originalEvent.touches[0].pageX;
+    x = mobile ? (x - offset.left) * 1.3 : x - offset.left;
+    var xRounding = Math.round(x/8) * 480;
+
+    $('.xpos').html(x);
+    if (xRounding <= 10000){
+       patStart = true;
+    }
+
+    if (xRounding == 18720 && patStart == true) {
+        patStart = false;
+        patCount++;
+        $('.patCount span').html(digits(patCount));
+        Backendless.APIServices.invoke('Gaozai', 'addpat', 1);
+    }
+
+    if (xRounding <= 28800) {
+        $(".gz-container img").css('left', '-'+xRounding+'px');
+        $('.pos').html(xRounding);
+    }
+});
+</script>
+</body>
+</html>

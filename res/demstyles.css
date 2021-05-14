@@ -1,0 +1,43 @@
+.bg-image {
+    background-image: url("bone.png");
+    background-repeat: repeat;
+    background-size: 25px 25px;
+}
+
+.gz-container {
+    width: 479px;
+    overflow: hidden;
+    border-color: #ff7675!important;
+    padding: 0;
+}
+
+.gz-container img {
+	position: relative;
+}
+
+.gz-color {
+    background-color: #ff7675;
+    border-color: #ff7675;
+    color: #f7e15f;
+}
+
+.stats {display: none;}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .gz-container {
+        transform: scale(.7);
+    }
+}
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px) 
+  and (-webkit-device-pixel-ratio: 2)
+  and (device-aspect-ratio: 40/71) {
+    .gz-container {
+        transform: scale(.6);
+    }
+}
