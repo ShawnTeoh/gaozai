@@ -1,3 +1,7 @@
+.words {
+    font-family: Comic Sans MS, var(--bs-font-sans-serif);
+}
+
 .bg-image {
     background-image: url("bone.png");
     background-repeat: repeat;

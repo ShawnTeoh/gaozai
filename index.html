@@ -16,14 +16,14 @@
 <body class="bg-image">
     <div class="container">
     <div class="row p-2">
-        <div class="bg-dark text-white text-center rounded-3">
+        <div class="words bg-dark text-white text-center rounded-3">
             <h1>Hi everybadai, it me Gao Zai!<br/>Welcome to Internetz!</h1>
             <span class="fs-3">Gib 1 Million pets pls?</span>
         </div>
     </div>
     <div class="row p-2 justify-content-center">
         <div class="gz-container border border-5">
-            <div class="patCount gz-color text-center fs-4">
+            <div class="words patCount gz-color text-center fs-4">
                 <span>...</span> pats given!
             </div>
             <img src="res/gaozai.jpg">
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="row p-2">
-        <div class="col text-center">
+        <div class="col text-center words">
             <a class="btn gz-color" target="_blank" href="https://www.instagram.com/julio_the_gaozai/">Instagram</a>
             <a class="btn gz-color" target="_blank" href="https://kabosutoken.io/">Support my friends!</a>
         </div>
@@ -57,7 +57,9 @@ Backendless.initApp(appId, apiKey);
 var patCount = Backendless.APIServices.invoke('Gaozai', 'patcount', null);
 patCount.then(function(result) {
     patCount = result;
-    $('.patCount span').html(digits(patCount));
+    $('.patCount span').fadeOut(200, function (obj) {
+        $(this).html(digits(patCount)).fadeIn(200);
+    });
 });
 
 var patStart = true;
@@ -76,7 +78,9 @@ $(".gz-container").on("mousemove touchmove", function(event) {
     if (xRounding == 18720 && patStart == true) {
         patStart = false;
         patCount++;
-        $('.patCount span').html(digits(patCount));
+        $('.patCount span').fadeOut(200, function (obj) {
+            $(this).html(digits(patCount)).fadeIn(200);
+        });
         Backendless.APIServices.invoke('Gaozai', 'addpat', 1);
     }
 
