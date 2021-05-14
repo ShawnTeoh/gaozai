@@ -1,5 +1,10 @@
+@font-face {
+    font-family: "Comic Sans";
+    src: url("ComicSansMS3.ttf");
+}
+
 .words {
-    font-family: Comic Sans MS, var(--bs-font-sans-serif);
+    font-family: "Comic Sans", Comic Sans MS, var(--bs-font-sans-serif);
 }
 
 .bg-image {
