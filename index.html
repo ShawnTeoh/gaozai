@@ -68,7 +68,7 @@ $(".gz-container").on("mousemove touchmove", function(event) {
     var offset = $(this).offset();
     var x = event.pageX || event.originalEvent.touches[0].pageX;
     x = mobile ? (x - offset.left) * 1.3 : x - offset.left;
-    var xRounding = Math.round(x/8) * 480;
+    var xRounding = Math.round(x/7.5) * 480;
 
     $('.xpos').html(x);
     if (xRounding <= 10000){
@@ -84,7 +84,7 @@ $(".gz-container").on("mousemove touchmove", function(event) {
         Backendless.APIServices.invoke('Gaozai', 'addpat', 1);
     }
 
-    if (xRounding <= 28800) {
+    if (xRounding <= 30240) {
         $(".gz-container img").css('left', '-'+xRounding+'px');
         $('.pos').html(xRounding);
     }
