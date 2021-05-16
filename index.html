@@ -67,8 +67,8 @@ $(".gz-container").on("mousemove touchmove", function(event) {
     var mobile = window.matchMedia("(min-width: 320px)") && window.matchMedia("(max-width: 480px)").matches;
     var offset = $(this).offset();
     var x = event.pageX || event.originalEvent.touches[0].pageX;
-    x = mobile ? (x - offset.left) * 1.3 : x - offset.left;
-    var xRounding = Math.round(x/7.5) * 480;
+    x = mobile ? (x - offset.left - 479 * 0.7) * 1.3 : x - offset.left - 479;
+    var xRounding = -Math.round(x/7.5) * 480;
 
     $('.xpos').html(x);
     if (xRounding <= 10000){
