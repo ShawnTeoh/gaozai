@@ -29,7 +29,8 @@
             <span class="fs-3">Gib 1 Million pets pls?</span>
         </div>
     </div>
-    <div class="row p-2 justify-content-center">
+    <div class="row p-2 justify-content-center text-center">
+        <div class="words">Swipe left!</div>
         <div class="gz-container border border-5">
             <div class="words patCount gz-color text-center fs-4">
                 <span>...</span> pats given!
@@ -58,14 +59,14 @@ function digits(countFormat){
     return parts.join(".");
 }
 
-const appId = 'F02175AF-4FE0-4A47-AFEB-77297BFF37FA';
-const apiKey = 'B3640179-FB49-4989-ADF2-58856454A80F';
+const appId = "F02175AF-4FE0-4A47-AFEB-77297BFF37FA";
+const apiKey = "B3640179-FB49-4989-ADF2-58856454A80F";
 Backendless.initApp(appId, apiKey);
 
-var patCount = Backendless.APIServices.invoke('Gaozai', 'patcount', null);
+var patCount = Backendless.APIServices.invoke("Gaozai", "patcount", null);
 patCount.then(function(result) {
     patCount = result;
-    $('.patCount span').fadeOut(200, function (obj) {
+    $(".patCount span").fadeOut(200, function (obj) {
         $(this).html(digits(patCount)).fadeIn(200);
     });
 });
@@ -78,23 +79,23 @@ $(".gz-container").on("mousemove touchmove", function(event) {
     x = mobile ? (x - offset.left - 480 * 0.7) * 1.3 : x - offset.left - 480;
     var xRounding = -Math.round(x/7.5) * 480;
 
-    $('.xpos').html(x);
-    if (xRounding <= 10000){
+    $(".xpos").html(x);
+    if (xRounding <= 6720){
        patStart = true;
     }
 
-    if (xRounding == 18720 && patStart == true) {
+    if (xRounding == 15360 && patStart == true) {
         patStart = false;
         patCount++;
-        $('.patCount span').fadeOut(200, function (obj) {
+        $(".patCount span").fadeOut(200, function (obj) {
             $(this).html(digits(patCount)).fadeIn(200);
         });
-        Backendless.APIServices.invoke('Gaozai', 'addpat', 1);
+        Backendless.APIServices.invoke("Gaozai", "addpat", 1);
     }
 
     if (xRounding <= 30240) {
-        $(".gz-container img").css('left', '-'+xRounding+'px');
-        $('.pos').html(xRounding);
+        $(".gz-container img").css("left", "-" + xRounding + "px");
+        $(".pos").html(xRounding);
     }
 });
 </script>
