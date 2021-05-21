@@ -73,6 +73,9 @@ patCount.then(function(result) {
 });
 
 var patStart = true;
+var patEnd = false;
+var xStart = 0;
+var xPrev = 0;
 $(".gz-container").on("mousemove touchmove", function(event) {
     var mobile = window.matchMedia("(min-width: 320px)") && window.matchMedia("(max-width: 480px)").matches;
     var offset = $(this).offset();
@@ -81,12 +84,16 @@ $(".gz-container").on("mousemove touchmove", function(event) {
     var xRounding = -Math.round(x/7.5) * 480;
 
     $(".xpos").html(x);
-    if (xRounding <= 14400){
-       patStart = true;
-    }
-
-    if (xRounding == 15360 && patStart == true) {
+    if (patStart && -x < 230 && xPrev > 0 && -x - xPrev > 0) {
+        xStart = -x;
         patStart = false;
+        patEnd = true;
+    }
+    xPrev = -x;
+
+    if (-x - xStart > 150 && patEnd) {
+        patStart = true;
+        patEnd = false;
         patCount++;
         $(".patCount span").fadeOut(200, function (obj) {
             $(this).html(digits(patCount)).fadeIn(200);
@@ -94,6 +101,7 @@ $(".gz-container").on("mousemove touchmove", function(event) {
         Backendless.APIServices.invoke("Gaozai", "addpat", 1);
     }
     $(".patstart").html(patStart);
+
     if (xRounding <= 30240) {
         $(".gz-container img").css("left", "-" + xRounding + "px");
         $(".pos").html(xRounding);
